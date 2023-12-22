@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        #output {
+            font-size: 24px;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="calculator">
+        <div id="output">0</div>
+        <div id="buttons">
+            <button onclick="clearOutput()">C</button>
+            <button onclick="appendInput('sqrt(')">√</button>
+            <button onclick="appendInput('^')">^</button>
+            <button onclick="deleteLast()">←</button>
+            <button onclick="appendInput('7')">7</button>
+            <button onclick="appendInput('8')">8</button>
+            <button onclick="appendInput('9')">9</button>
+            <button onclick="appendInput('/')">/</button>
+            <button onclick="appendInput('4')">4</button>
+            <button onclick="appendInput('5')">5</button>
+            <button onclick="appendInput('6')">6</button>
+            <button onclick="appendInput('*')">*</button>
+            <button onclick="appendInput('1')">1</button>
+            <button onclick="appendInput('2')">2</button>
+            <button onclick="appendInput('3')">3</button>
+            <button onclick="appendInput('-')">-</button>
+            <button onclick="appendInput('0')">0</button>
+            <button onclick="appendInput('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendInput('+')">+</button>
+            <button onclick="appendInput('Math.sin(')">sin</button>
+            <button onclick="appendInput('Math.cos(')">cos</button>
+            <button onclick="appendInput('Math.tan(')">tan</button>
+        </div>
+    </div>
+
+    <script>
+        function clearOutput() {
+            document.getElementById('output').innerText = '0';
+        }
+
+        function appendInput(value) {
+            let output = document.getElementById('output');
+            if (output.innerText === '0') {
+                output.innerText = '';
+            }
+            output.innerText += value;
+        }
+
+        function deleteLast() {
+            let output = document.getElementById('output');
+            output.innerText = output.innerText.slice(0, -1);
+            if (output.innerText === '') {
+                output.innerText = '0';
+            }
+        }
+
+        function calculate() {
+            let output = document.getElementById('output');
+            try {
+                output.innerText = eval(output.innerText);
+            } catch (error) {
+                output.innerText = 'Error';
+            }
+        }
+    </script>
+
+</body>
+</html>
